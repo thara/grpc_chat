@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "grpc_chat/chat";
+
+message Message {
+  string text = 1;
+}
+
+message Recipient {
+  uint64 id   = 1;
+  string name = 2;
+}
+
+message JoinRequest {
+  string name = 1;
+}
+message JoinResponse {
+  uint64 id = 1;
+}
+
+message MessageRequest {
+  uint64  id      = 1;
+  Message message = 2;
+}
+
+message Subscription {
+  Recipient recipient = 1;
+  Message   message   = 2;
+}
+
+message LeaveRequest {
+  uint64 id = 1;
+}
+
+message Empty {}
+
+service Chat {
+  rpc Join(JoinRequest) returns (JoinResponse);
+
+  rpc Messages(stream MessageRequest) returns (stream Subscription);
+
+  rpc Leave(LeaveRequest) returns (Empty);
+}
