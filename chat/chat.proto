@@ -25,7 +25,7 @@ message MessageRequest {
   Message message = 2;
 }
 
-message Subscription {
+message ChatMessage {
   Recipient recipient = 1;
   Message   message   = 2;
 }
@@ -39,7 +39,7 @@ message Empty {}
 service Chat {
   rpc Join(JoinRequest) returns (JoinResponse);
 
-  rpc Messages(stream MessageRequest) returns (stream Subscription);
+  rpc Messages(stream MessageRequest) returns (stream ChatMessage);
 
   rpc Leave(LeaveRequest) returns (Empty);
 }
