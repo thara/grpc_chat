@@ -23,6 +23,7 @@ func main() {
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	chat.RegisterChatServer(grpcServer, newServer())
+	chat.RegisterChatServer(grpcServer, newChatServer())
+	chat.RegisterHealthServer(grpcServer, new(healthServer))
 	grpcServer.Serve(lis)
 }

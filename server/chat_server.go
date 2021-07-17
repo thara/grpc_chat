@@ -21,7 +21,7 @@ type chatServer struct {
 
 var _ chat.ChatServer = &chatServer{}
 
-func newServer() chat.ChatServer {
+func newChatServer() chat.ChatServer {
 	return &chatServer{
 		room: newRoom(context.Background()),
 	}
